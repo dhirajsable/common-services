@@ -10,6 +10,13 @@ ext.versions = [
         springBoot: '2.2.6.RELEASE'
 ]
 
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    group = 'com.contact.login'
+    version = '20200515.1'
+}
+
 repositories {
     mavenCentral()
 }
