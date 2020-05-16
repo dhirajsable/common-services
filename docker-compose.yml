@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  discivery-service:
+    image: 'discovery-service:latest'
+    ports:
+      - '8761:8761'
+
+  doscovery-client:
+    image: 'discovery-client:latest'
+    depends_on:
+      - discivery-service
+    ports:
+      - '4002:4002'
