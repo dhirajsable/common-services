@@ -10,7 +10,6 @@ sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
@@ -24,8 +23,9 @@ dependencyManagement {
 }
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.0.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: '2.2.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
