@@ -11,6 +11,7 @@ spring:
         vault:
           host: 127.0.0.1
           port: 8200
+          kv-version: 2
 
 management:
   endpoints:
