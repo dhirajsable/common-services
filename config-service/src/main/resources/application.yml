@@ -1,16 +1,19 @@
 server:
   port: 8888
-
 spring:
+  application:
+    name: config-service
   profiles:
     active: vault
-  application:
-    name: configservice
-
   cloud:
     config:
       server:
         vault:
+          host: 127.0.0.1
           port: 8200
-          host: 127.0.01
-          kv-version: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, env

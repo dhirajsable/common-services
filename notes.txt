@@ -1,0 +1,6 @@
+=============VAULT=========
+export VAULT_DEV_ROOT_TOKEN_ID="s.XmpNPoi9sRhYtdKHaQhkHP6x"
+export VAULT_ADDR='http://127.0.0.1:8200'
+
+vault server -dev
+vault status
