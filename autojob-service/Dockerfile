@@ -1,8 +1,8 @@
 FROM gradle:6.4.0-jdk11 as app-builder
 
 USER root
-RUN mkdir -p /usr/config-service
-WORKDIR /usr/config-service
+RUN mkdir -p /usr/job-service
+WORKDIR /usr/job-service
 COPY src ./src
 COPY build.gradle .
 RUN gradle clean build bootJar -x test
@@ -15,8 +15,8 @@ FROM openjdk:14-jdk-alpine
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
-COPY --from=app-builder /usr/config-service/build/libs/config-service-0.0.1-SNAPSHOT.jar .
+COPY --from=app-builder /usr/job-service/build/libs/job-service-0.0.1-SNAPSHOT.jar .
 ENV JAVA_OPTS=""
 EXPOSE 8083
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar ./config-service-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar ./job-service-0.0.1-SNAPSHOT.jar"]
