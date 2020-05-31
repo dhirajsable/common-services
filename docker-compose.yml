@@ -1,14 +1,51 @@
-version: '3'
+version: '3.1'
 
 services:
-  discivery-service:
-    image: 'discovery-service:latest'
+  discovery-service:
+    build:
+      context: ./discovery-service
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    networks:
+      contactlogin:
+        aliases:
+          - discovery
     ports:
-      - '8761:8761'
+      - 8761:8761
 
-  doscovery-client:
-    image: 'discovery-client:latest'
+  discovery-client:
+    build:
+      context: ./discovery-client
+      dockerfile: Dockerfile
+    container_name: discovery-client
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    networks:
+      contactlogin:
+        aliases:
+          - discovery-client
     depends_on:
-      - discivery-service
+      - discovery-service
     ports:
-      - '4002:4002'
+      - 4002:4002
+
+  config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
+    container_name: config-service
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    networks:
+      contactlogin:
+        aliases:
+          - config-service
+    depends_on:
+      - discovery-service
+      - discovery-client
+    ports:
+      - 8888:8888
+
+networks:
+  contactlogin:
+    driver: bridge
