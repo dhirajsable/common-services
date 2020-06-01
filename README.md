@@ -1,11 +1,20 @@
 # common-services
 common-services
 
-## Build Docker Images
+## Build and Run Docker Images
+    1. docker-compose up --build (Fresh setup might take some time to build)
+    
+## Usage
+    1. Get Discovery Service at http://localhost:8761
 ### Discovery Service 
+    1. docker build . -t discovery-service
+    2. docker tag <DOCKER_IMAGE_ID> sabledhiraj/discovery-service:<version>
+    3. docker push sabledhiraj/discovery-service:<version>
+### Discovery Client
     1. docker build -t discovery-client .
-    2. http://localhost:5000/actuator/health
+    2. docker tag <DOCKER_IMAGE_ID> sabledhiraj/discovery-client:<version>
+    3. docker push sabledhiraj/discovery-client:<version>
 ### Discovery Client
     1. docker build -t discovery-service .
-    2. http://localhost:4002/api/v1/client/service-instances/<APP_NAME>
-    3. http://localhost:5001/actuator/health
+    2. docker tag <DOCKER_IMAGE_ID> sabledhiraj/config-service:<version>
+    3. docker push sabledhiraj/config-service:<version>
