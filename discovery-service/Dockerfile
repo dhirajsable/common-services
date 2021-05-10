@@ -1,4 +1,5 @@
-FROM gradle:6.4.0-jdk11 as app-builder
+#FROM gradle:6.4.0-jdk11 as app-builder
+FROM gradle:6.8.3-jdk11 as app-builder
 
 USER root
 RUN mkdir -p /usr/discovery-service

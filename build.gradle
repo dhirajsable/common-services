@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
     id 'java'
-    id "com.diffplug.spotless" version "5.10.2"
+    id "com.diffplug.spotless" version "5.12.4"
     id "idea"
     id "java-library"
     id "com.gorylenko.gradle-git-properties" version "2.2.4"
@@ -42,7 +42,7 @@ subprojects {
 
     spotless {
         java {
-            googleJavaFormat("1.7")
+            googleJavaFormat("1.10.0")
         }
 
         format 'gradle', {
