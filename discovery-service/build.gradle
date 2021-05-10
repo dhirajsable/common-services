@@ -1,20 +1,15 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
+    id 'java-library'
+    id 'org.springframework.boot' version '2.4.5'
 }
 
-group = 'com.contact.login'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
+    mavenLocal()
     mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
-}
-
-ext {
-    set('springCloudVersion', "Hoxton.SR3")
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencyManagement {
@@ -24,13 +19,10 @@ dependencyManagement {
 }
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.0.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: '2.2.2.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springframework
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: versions.springCloud
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-}
-
-test {
-    useJUnitPlatform()
 }
