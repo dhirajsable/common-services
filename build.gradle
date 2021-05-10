@@ -1,26 +1,68 @@
 plugins {
+    id 'groovy'
     id 'java'
+    id "com.diffplug.spotless" version "5.10.2"
+    id "idea"
+    id "java-library"
+    id "com.gorylenko.gradle-git-properties" version "2.2.4"
 }
 
 group 'com.contact.login'
 version '1.0-SNAPSHOT'
 
 ext.versions = [
-        commonslogging: '1.2',
-        springBoot: '2.2.6.RELEASE'
+        commonslogging : '1.2',
+        springBoot     : '2.2.6.RELEASE',
+        springframework: '2.4.5',
+        groovy         : '3.0.7',
+        springSecurity : '5.4.6',
+        springCloud    : '3.0.2'
 ]
 
+ext {
+    springCloudVersion = '2020.0.2'
+}
+
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven-publish'
     group = 'com.contact.login'
-    version = '20200515.1'
+    version = '20210509.1'
 }
 
-repositories {
-    mavenCentral()
-}
+subprojects {
+    apply plugin: 'maven-publish'
+    apply plugin: 'groovy'
+    apply plugin: "com.diffplug.spotless"
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs += "-Xlint:all,-options,-serial,-processing"
+    }
+
+    spotless {
+        java {
+            googleJavaFormat("1.7")
+        }
+
+        format 'gradle', {
+            target '**/*.gradle'
+            replaceRegex 'blank lines following {', '\\{\\n\\s*\\n+', '{\n'
+        }
+    }
+
+    jar {
+        enabled = true
+    }
+
+    dependencies {
+        compile group: 'org.codehaus.groovy', name: 'groovy-all', version: versions.groovy, ext: 'pom'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
 }
