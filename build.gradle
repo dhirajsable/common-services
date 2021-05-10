@@ -25,7 +25,7 @@ ext {
 
 allprojects {
     group = 'com.contact.login'
-    version = '20210509.1'
+    version = '0.0.1-SNAPSHOT'
 }
 
 subprojects {

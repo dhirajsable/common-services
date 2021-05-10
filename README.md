@@ -8,6 +8,9 @@ How to build Discovery Server
     1. docker build . -t discovery-service
     2. docker run -p 8761:8761 <DOCKER_IMAGE_ID>
 
+How to clear docker cache
+    1. docker builder prune
+
 If you dont wantn to build the code locally then you can pull docker image from docker hub 
 docker pull sabledhiraj/discovery-service:latest
 
