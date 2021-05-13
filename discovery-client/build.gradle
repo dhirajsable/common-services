@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'org.springframework.boot' version '2.4.5'
+    id "com.palantir.docker" version "0.26.0"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -29,4 +30,16 @@ dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
+}
+
+docker {
+    dependsOn build
+    name "contactlogin/${project.name}:${project.version}"
+    files bootJar.archiveFile
+    buildArgs([JAR_FILE: "${bootJar.archiveFileName.get()}"])
+    noCache true
+}
+
+bootBuildImage{
+    imageName='contactlogin/'+project.name
 }

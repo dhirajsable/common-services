@@ -13,21 +13,21 @@ services:
     ports:
       - 8761:8761
 
-  discovery-client:
-    build:
-      context: ./discovery-client
-      dockerfile: Dockerfile
-    container_name: discovery-client
-    environment:
-      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
-    networks:
-      contactlogin:
-        aliases:
-          - discovery-client
-    depends_on:
-      - discovery-service
-    ports:
-      - 4002:4002
+#  discovery-client:
+#    build:
+#      context: ./discovery-client
+#      dockerfile: Dockerfile
+#    container_name: discovery-client
+#    environment:
+#      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+#    networks:
+#      contactlogin:
+#        aliases:
+#          - discovery-client
+#    depends_on:
+#      - discovery-service
+#    ports:
+#      - 4002:4002
 
   config-service:
     build:
@@ -42,7 +42,6 @@ services:
           - config-service
     depends_on:
       - discovery-service
-      - discovery-client
     ports:
       - 8888:8888
 

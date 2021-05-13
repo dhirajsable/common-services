@@ -10,6 +10,7 @@ How to build Discovery Server
 
 How to clear docker cache
     1. docker builder prune
+    2. docker rmi -f $(docker images -a -q)
 
 If you dont wantn to build the code locally then you can pull docker image from docker hub 
 docker pull sabledhiraj/discovery-service:latest
@@ -32,7 +33,14 @@ docker pull sabledhiraj/config-service:latest
     1. docker build -t config-service .
     
 ## Build and Run Docker Images
-    1. docker-compose up --build (Fresh setup might take some time to build)
+    ./gradlew clean
+    ./gradlew clean classes build
+    docker-compose up --build
     
 ## Usage
     1. Get Discovery Service at http://localhost:8761
+
+### Docker Commands
+    docker kill $(docker ps -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -q)
