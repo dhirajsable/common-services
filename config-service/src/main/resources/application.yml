@@ -13,13 +13,7 @@ spring:
           port: 8200
           kv-version: 2
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: info, health, env
 
-eureka:
-  client:
-    service-url:
-      default-zone: http://localhost:8761/eureka/
+
+
+

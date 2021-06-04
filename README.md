@@ -8,6 +8,10 @@ How to build Discovery Server
     1. docker build . -t discovery-service
     2. docker run -p 8761:8761 <DOCKER_IMAGE_ID>
 
+How to clear docker cache
+    1. docker builder prune
+    2. docker rmi -f $(docker images -a -q)
+
 If you dont wantn to build the code locally then you can pull docker image from docker hub 
 docker pull sabledhiraj/discovery-service:latest
 
@@ -29,7 +33,17 @@ docker pull sabledhiraj/config-service:latest
     1. docker build -t config-service .
     
 ## Build and Run Docker Images
-    1. docker-compose up --build (Fresh setup might take some time to build)
+    ./gradlew clean
+    ./gradlew clean classes build
+    docker-compose up --build
     
 ## Usage
     1. Get Discovery Service at http://localhost:8761
+
+### Docker Commands
+    docker kill $(docker ps -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -q)
+    Create External Docker Network:- docker network create contactlogin
+    Check docker networks:- docker network ls
+    Remove docker network:- docker network rm  contactlogin

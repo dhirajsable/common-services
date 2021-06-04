@@ -6,11 +6,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 public class FetchAccountJob {
 
-    private static final Log log = LogFactory.getLog(FetchAccountJob.class);
+  private static final Log log = LogFactory.getLog(FetchAccountJob.class);
 
-    @Scheduled(fixedDelay = 100L)
-    void fetchAccounts() {
-
-    }
-
+  @Scheduled(fixedDelay = 100L)
+  void fetchAccounts() {}
 }
