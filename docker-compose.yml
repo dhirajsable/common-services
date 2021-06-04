@@ -6,10 +6,7 @@ services:
       context: ./discovery-service
       dockerfile: Dockerfile
     container_name: discovery-service
-    networks:
-      contactlogin:
-        aliases:
-          - discovery
+    image: discovery-service
     ports:
       - 8761:8761
 
@@ -34,17 +31,15 @@ services:
       context: ./config-service
       dockerfile: Dockerfile
     container_name: config-service
+    image: config-service
     environment:
       - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
-    networks:
-      contactlogin:
-        aliases:
-          - config-service
     depends_on:
       - discovery-service
     ports:
       - 8888:8888
 
 networks:
-  contactlogin:
-    driver: bridge
+  default:
+    external:
+      name: contactlogin

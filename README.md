@@ -44,3 +44,6 @@ docker pull sabledhiraj/config-service:latest
     docker kill $(docker ps -q)
     docker rm $(docker ps -a -q)
     docker rmi $(docker images -q)
+    Create External Docker Network:- docker network create contactlogin
+    Check docker networks:- docker network ls
+    Remove docker network:- docker network rm  contactlogin
